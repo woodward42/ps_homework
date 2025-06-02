@@ -1,4 +1,15 @@
 :root {
+  --color-primary: #222222;
+  --color-primary-bg: #f0f4f8;
+  --font: "Roboto", sans-serif;
+  --button-color-primary: #ffffff;
+  --button-color-primary-bg: #008bfe;
+}
+
+body {
+  color: var(--color-primary);
+  background-color: var(--color-primary-bg);
+  font-family: var(--font);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

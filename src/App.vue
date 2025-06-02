@@ -1,12 +1,9 @@
 <script setup>
-//текущая дата
-const curDate = new Date().toLocaleString("ru-RU");
+import AppButton from "./components/AppButton.vue";
 </script>
 
 <template>
-  
-  <!-- Дата на момент загрузки страницы  -->
-  <div>Текущая дата: {{ curDate }}</div>
+  <AppButton />
 </template>
 
 <style scoped></style>
