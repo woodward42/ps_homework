@@ -1,14 +1,12 @@
 <script setup></script>
 
 <template>
-  <button class="app-button">
-    <slot>Начать игру</slot>
-  </button>
+  <button class="app-button"><slot>Начать игру</slot></button>
 </template>
 
 <style scoped>
 .app-button {
-    width: 335px;
+  width: 335px;
   padding: 16px 10px;
   border: transparent;
   border-radius: 100px;
