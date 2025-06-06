@@ -6,7 +6,12 @@ import GameCard from './components/GameCard.vue'
 <template>
   <AppHeader />
   <hr />
-  <div style="display: flex; justify-content: center"><GameCard /></div>
+  <div style="display: flex; justify-content: center">
+    <GameCard
+      @flip-card="console.log('flipped')"
+      @set-card-status="console.log(`card status changed`)"
+    />
+  </div>
 </template>
 
 <style scoped></style>
