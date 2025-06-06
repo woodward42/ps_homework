@@ -9,7 +9,7 @@ import GameCard from './components/GameCard.vue'
   <div style="display: flex; justify-content: center">
     <GameCard
       @flip-card="console.log('flipped')"
-      @set-card-status="console.log(`card status changed`)"
+      @set-card-status="(payload) => console.log(`card status changed: ${payload}`)"
     />
   </div>
 </template>

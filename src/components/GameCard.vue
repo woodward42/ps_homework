@@ -3,6 +3,18 @@ import WrongSmall from './icons/WrongSmall.vue'
 import RightSmall from './icons/RightSmall.vue'
 
 const emit = defineEmits(['flipCard', 'setCardStatus'])
+
+//обработчик для переворота карты
+function handleFlipCard() {
+  console.log('handleFlepCard() call')
+  emit('flipCard')
+}
+
+//обработчик для установки статуса
+function handleSetCardStatus(status) {
+  console.log('handlesetCardStatus() call')
+  emit('setCardStatus', status)
+}
 </script>
 
 <template>
@@ -13,18 +25,14 @@ const emit = defineEmits(['flipCard', 'setCardStatus'])
       <span class="word rus-word">RUS WORD</span>
       <div class="game-card-action-container">
         <div
-          @click="emit('flipCard')"
+          @click="handleFlipCard"
           class="action-flip"
-          v-if="true"
         >
           Перевернуть
         </div>
-        <div
-          class="action-right-wrong"
-          v-if="false"
-        >
-          <WrongSmall @click="emit('setCardStatus', 'wrong')" />
-          <RightSmall @click="emit('setCardStatus', 'right')" />
+        <div class="action-right-wrong">
+          <WrongSmall @click="handleSetCardStatus('wrong')" />
+          <RightSmall @click="handleSetCardStatus('right')" />
         </div>
       </div>
     </div>
