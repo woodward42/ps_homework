@@ -13,6 +13,7 @@ const emit = defineEmits(['flipCard', 'setCardStatus'])
       <span class="word rus-word">RUS WORD</span>
       <div class="game-card-action-container">
         <div
+          @click="emit('flipCard')"
           class="action-flip"
           v-if="true"
         >
@@ -22,8 +23,8 @@ const emit = defineEmits(['flipCard', 'setCardStatus'])
           class="action-right-wrong"
           v-if="false"
         >
-          <WrongSmall />
-          <RightSmall />
+          <WrongSmall @click="emit('setCardStatus', 'wrong')" />
+          <RightSmall @click="emit('setCardStatus', 'right')" />
         </div>
       </div>
     </div>
