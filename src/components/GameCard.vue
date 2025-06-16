@@ -1,9 +1,8 @@
 <script setup>
-import { ref } from 'vue'
-
 import WrongSmall from './icons/WrongSmall.vue'
 import RightSmall from './icons/RightSmall.vue'
 
+const props = defineProps({ cardState: Object })
 const emit = defineEmits(['flipCard', 'setCardStatus'])
 
 //обработчик для переворота карты
@@ -18,14 +17,6 @@ function handleSetCardStatus(status) {
   emit('setCardStatus', status)
 }
 //---
-
-//переменная для хранения состояния карточки
-const cardState = ref({
-  word: 'игра',
-  translation: 'game',
-  state: 'closed',
-  status: 'pending',
-})
 </script>
 
 <template>

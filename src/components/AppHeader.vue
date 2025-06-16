@@ -1,11 +1,13 @@
 <script setup>
 import BadgeScore from './BadgeScore.vue'
+
+const props = defineProps({ score: Number })
 </script>
 
 <template>
   <div class="header-container">
     <div class="header-logo">Запомни слово</div>
-    <BadgeScore :score="101" />
+    <BadgeScore :score="score" />
   </div>
 </template>
 
