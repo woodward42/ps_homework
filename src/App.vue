@@ -1,6 +1,11 @@
 <script setup>
+import { ref } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import GameCard from './components/GameCard.vue'
+
+//переменная для хранения очков, которую передадим в BadgeScore
+const currentScore = ref(0);
+
 </script>
 
 <template>

@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from 'vue'
+
 import WrongSmall from './icons/WrongSmall.vue'
 import RightSmall from './icons/RightSmall.vue'
 
@@ -15,6 +17,15 @@ function handleSetCardStatus(status) {
   console.log('handlesetCardStatus() call')
   emit('setCardStatus', status)
 }
+//---
+
+//переменная для хранения состояния карточки
+const cardState = ref({
+  word: 'игра',
+  translation: 'game',
+  state: 'closed',
+  status: 'pending',
+})
 </script>
 
 <template>
@@ -23,6 +34,7 @@ function handleSetCardStatus(status) {
       <span class="game-card-number-container">42</span>
       <span class="word eng-word">ENG WORD</span>
       <span class="word rus-word">RUS WORD</span>
+      <pre>{{ cardState }}</pre>
       <div class="game-card-action-container">
         <div
           @click="handleFlipCard"
