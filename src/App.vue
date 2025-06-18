@@ -1,30 +1,53 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+
+import AppHeader from './components/AppHeader.vue'
+import GameCard from './components/GameCard.vue'
+
+//переменная для хранения очков, которую передадим в BadgeScore
+const currentScore = ref(42)
+
+//переменная для хранения карточек
+const cards = ref([
+  {
+    word: 'game',
+    translation: 'игра',
+    state: 'closed',
+    status: 'pending',
+  },
+  {
+    word: 'game',
+    translation: 'игра',
+    state: 'opened',
+    status: 'pending',
+  },
+  {
+    word: 'game',
+    translation: 'игра',
+    state: 'opened',
+    status: 'success',
+  },
+  {
+    word: 'game',
+    translation: 'игра',
+    state: 'opened',
+    status: 'error',
+  },
+])
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <AppHeader :score="currentScore" />
+  <hr />
+  <div style="display: flex; justify-content: center">
+    <GameCard
+      v-for="(card, idx) in cards"
+      :key="`card-${idx}`"
+      :card-state="card"
+      @flip-card="console.log('flipped')"
+      @set-card-status="(payload) => console.log(`card status changed: ${payload}`)"
+    />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style scoped></style>
