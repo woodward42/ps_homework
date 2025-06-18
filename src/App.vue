@@ -8,12 +8,30 @@ import GameCard from './components/GameCard.vue'
 const currentScore = ref(42)
 
 //переменная для хранения карточек
-const cardState = ref([
+const cards = ref([
   {
-    word: 'игра',
-    translation: 'game',
+    word: 'game',
+    translation: 'игра',
     state: 'closed',
     status: 'pending',
+  },
+  {
+    word: 'game',
+    translation: 'игра',
+    state: 'opened',
+    status: 'pending',
+  },
+  {
+    word: 'game',
+    translation: 'игра',
+    state: 'opened',
+    status: 'success',
+  },
+  {
+    word: 'game',
+    translation: 'игра',
+    state: 'opened',
+    status: 'error',
   },
 ])
 </script>
@@ -23,7 +41,9 @@ const cardState = ref([
   <hr />
   <div style="display: flex; justify-content: center">
     <GameCard
-      :card-state="cardState[0]"
+      v-for="(card, idx) in cards"
+      :key="`card-${idx}`"
+      :card-state="card"
       @flip-card="console.log('flipped')"
       @set-card-status="(payload) => console.log(`card status changed: ${payload}`)"
     />

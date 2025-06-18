@@ -1,6 +1,8 @@
 <script setup>
 import WrongSmall from './icons/WrongSmall.vue'
+import WrongBig from './icons/WrongBig.vue'
 import RightSmall from './icons/RightSmall.vue'
+import RightBig from './icons/RightBig.vue'
 
 const props = defineProps({ cardState: Object })
 const emit = defineEmits(['flipCard', 'setCardStatus'])
@@ -23,19 +25,46 @@ function handleSetCardStatus(status) {
   <div class="game-card-container">
     <div class="game-card-inner-container">
       <span class="game-card-number-container">42</span>
-      <span class="word eng-word">ENG WORD</span>
-      <span class="word rus-word">RUS WORD</span>
-      <pre>{{ cardState }}</pre>
+      <div
+        v-if="cardState.status !== 'pending'"
+        class="game-card-status-container"
+      >
+        <RightSmall v-if="cardState.status === 'success'" />
+        <WrongSmall v-else />
+      </div>
+      <span
+        v-if="cardState.state === 'closed'"
+        class="word eng-word"
+        >{{ cardState.word }}</span
+      >
+      <span
+        v-else
+        class="word rus-word"
+        >{{ cardState.translation }}</span
+      >
+
       <div class="game-card-action-container">
         <div
+          v-if="cardState.state === 'closed'"
           @click="handleFlipCard"
           class="action-flip"
         >
           Перевернуть
         </div>
-        <div class="action-right-wrong">
+
+        <div
+          v-else-if="cardState.state === 'opened' && cardState.status === 'pending'"
+          class="action-right-wrong"
+        >
           <WrongSmall @click="handleSetCardStatus('wrong')" />
           <RightSmall @click="handleSetCardStatus('right')" />
+        </div>
+
+        <div
+          v-else
+          class="action-done"
+        >
+          Завершено
         </div>
       </div>
     </div>
@@ -75,6 +104,13 @@ function handleSetCardStatus(status) {
   position: absolute;
   top: -9px;
   left: 20px;
+  background-color: #ffffff;
+}
+
+.game-card-status-container {
+  position: absolute;
+  top: -9px;
+  left: 110px;
   font-size: 14px;
   background-color: #ffffff;
 }
@@ -98,7 +134,8 @@ function handleSetCardStatus(status) {
   width: 100%;
 }
 
-.action-flip {
+.action-flip,
+.action-done {
   font-weight: 700;
   font-size: 12px;
   text-transform: uppercase;
