@@ -4,7 +4,7 @@ import WrongBig from './icons/WrongBig.vue'
 import RightSmall from './icons/RightSmall.vue'
 import RightBig from './icons/RightBig.vue'
 
-const props = defineProps({ cardState: Object })
+const props = defineProps({ cardState: Object, cardNumber: Number })
 const emit = defineEmits(['flipCard', 'setCardStatus'])
 
 //обработчик для переворота карты
@@ -24,7 +24,7 @@ function handleSetCardStatus(status) {
 <template>
   <div class="game-card-container">
     <div class="game-card-inner-container">
-      <span class="game-card-number-container">42</span>
+      <span class="game-card-number-container">{{ cardNumber }}</span>
       <div
         v-if="cardState.status !== 'pending'"
         class="game-card-status-container"
@@ -98,6 +98,7 @@ function handleSetCardStatus(status) {
   font-weight: 400;
   font-size: 18px;
   align-self: center;
+  text-align: center;
 }
 
 .game-card-number-container {
