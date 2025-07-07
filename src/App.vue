@@ -27,6 +27,16 @@ async function getWords() {
   }
 }
 
+//function handleFlipCard
+function handleFlipCard(idx) {
+  cards.value[idx].state = 'opened'
+}
+
+//function handleSetCardStatus
+function handleSetCardStatus(idx, status) {
+  cards.value[idx].status = status
+}
+
 onMounted(() => {
   getWords()
 })
@@ -42,8 +52,8 @@ onMounted(() => {
         :key="`card-${idx}`"
         :card-state="card"
         :card-number="idx"
-        @flip-card="console.log('flipped')"
-        @set-card-status="(payload) => console.log(`card status changed: ${payload}`)"
+        @flip-card="handleFlipCard(idx)"
+        @set-card-status="(status) => handleSetCardStatus(idx, status)"
       />
     </div>
   </template>

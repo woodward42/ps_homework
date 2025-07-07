@@ -8,14 +8,12 @@ const props = defineProps({ cardState: Object, cardNumber: Number })
 const emit = defineEmits(['flipCard', 'setCardStatus'])
 
 //обработчик для переворота карты
-function handleFlipCard() {
-  console.log('handleFlepCard() call')
+function emitFlipCard() {
   emit('flipCard')
 }
 
 //обработчик для установки статуса
-function handleSetCardStatus(status) {
-  console.log('handlesetCardStatus() call')
+function emitSetCardStatus(status) {
   emit('setCardStatus', status)
 }
 //---
@@ -29,24 +27,24 @@ function handleSetCardStatus(status) {
         v-if="cardState.status !== 'pending'"
         class="game-card-status-container"
       >
-        <RightSmall v-if="cardState.status === 'success'" />
+        <RightSmall v-if="cardState.status === 'right'" />
         <WrongSmall v-else />
       </div>
       <span
         v-if="cardState.state === 'closed'"
-        class="word eng-word"
-        >{{ cardState.word }}</span
+        class="word rus-word"
+        >{{ cardState.translation }}</span
       >
       <span
         v-else
-        class="word rus-word"
-        >{{ cardState.translation }}</span
+        class="word eng-word"
+        >{{ cardState.word }}</span
       >
 
       <div class="game-card-action-container">
         <div
           v-if="cardState.state === 'closed'"
-          @click="handleFlipCard"
+          @click="emitFlipCard"
           class="action-flip"
         >
           Перевернуть
@@ -56,8 +54,8 @@ function handleSetCardStatus(status) {
           v-else-if="cardState.state === 'opened' && cardState.status === 'pending'"
           class="action-right-wrong"
         >
-          <WrongSmall @click="handleSetCardStatus('wrong')" />
-          <RightSmall @click="handleSetCardStatus('right')" />
+          <WrongSmall @click="emitSetCardStatus('wrong')" />
+          <RightSmall @click="emitSetCardStatus('right')" />
         </div>
 
         <div
