@@ -4,6 +4,8 @@ import WrongBig from './icons/WrongBig.vue'
 import RightSmall from './icons/RightSmall.vue'
 import RightBig from './icons/RightBig.vue'
 
+
+
 const props = defineProps({ cardState: Object, cardNumber: Number })
 const emit = defineEmits(['flipCard', 'setCardStatus'])
 

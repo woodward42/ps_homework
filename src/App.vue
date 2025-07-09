@@ -3,9 +3,10 @@ import { ref, onMounted } from 'vue'
 
 import AppHeader from './components/AppHeader.vue'
 import GameCard from './components/GameCard.vue'
+import AppButton from './components/AppButton.vue'
 
 //переменная для хранения очков, которую передадим в BadgeScore
-const currentScore = ref(42)
+let currentScore = ref(42)
 
 //переменная для хранения карточек
 const cards = ref([])
@@ -35,6 +36,19 @@ function handleFlipCard(idx) {
 //function handleSetCardStatus
 function handleSetCardStatus(idx, status) {
   cards.value[idx].status = status
+
+  if (status === 'right'){
+    currentScore.value+=10
+  }
+  else{
+    currentScore.value-=4
+  }
+}
+
+//начать заново
+function resetGame(){
+  currentScore.value = 42;
+  getWords()
 }
 
 onMounted(() => {
@@ -56,6 +70,8 @@ onMounted(() => {
         @set-card-status="(status) => handleSetCardStatus(idx, status)"
       />
     </div>
+    <hr />
+    <div style="display: flex; justify-content: center;"><AppButton @click="resetGame">Начать заново</AppButton></div>
   </template>
 </template>
 
